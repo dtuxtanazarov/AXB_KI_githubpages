@@ -1,38 +1,17 @@
-name: Deploy to GitHub Pages
+name: Frontend CI/CD
 
 on:
   push:
-    branches:
-      - main  # Main branchga kod tushganda ishga tushadi
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-permissions:
-  contents: write  # Bu qator robotga yangi branch yaratishga ruxsat beradi
+    branches: [main]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout kodni yuklash
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: GitHub Pages-ni sozlash
-        uses: actions/configure-pages@v4
-
-      - name: Fayllarni yuklash (Upload)
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-<<<<<<< HEAD
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-=======
-          path: '.'  # Loyihangiz joylashgan joy (hozirgi papka)
-
-      - name: Deploy qilish
-        id: deployment
-        uses: actions/deploy-pages@v4
->>>>>>> eed5819c8c5e54c7d65e327ec464dfa32cdc07d1
